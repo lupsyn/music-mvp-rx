@@ -26,7 +26,16 @@ This setup has a number of advantages over a non-MVP app architecture
     - easy to do long running operations off the main thread
     - in app code but also in the unit tests, e.g the excellent `TestScheduler`  
     
-    # License
+## Implementation
+
+ This project has a separate module called [`mocks`]. Our android application module `core` has a `testCompile`
+ dependency on the `mocks` module. Also, created a [`LocalResponseDispatcher`] which takes care of the local API needs.
+
+ We use `MockWebserver` to test the API calls in our ModelRepository (`MusicIteractor`)
+ and we use `Mockito`to test our Presenter (`MainPresenterImpl`) by mocking out the view.
+
+
+# License
 
 MIT License
 
