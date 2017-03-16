@@ -28,11 +28,14 @@ This setup has a number of advantages over a non-MVP app architecture
     
 ## Implementation
 
- This project has a separate module called [`mocks`]. Our android application module `core` has a `testCompile`
- dependency on the `mocks` module. Also, created a [`LocalResponseDispatcher`] which takes care of the local API needs.
+ This project has a separate module called `mocks`. Our android application module `app` has a `testCompile`
+ dependency on the `mocks` module.  (Injected with dagger)
+ We have created a `LocalResponseDispatcher` which takes care of the local API needs,  we use `MockWebserver` to test the API calls.
 
- We use `MockWebserver` to test the API calls in our ModelRepository (`MusicIteractor`)
- and we use `Mockito`to test our Presenter (`MainPresenterImpl`) by mocking out the view.
+ Also the testCompile in the `core` module depends on mocks in which we have stored .json response,
+ in order to correctly test in Junit plain tests.
+
+
 
 
 # License

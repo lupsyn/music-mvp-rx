@@ -74,11 +74,6 @@ public class MusicMapper {
                 return toFilter.uri;
             }
         }
-//        for (StoreAction toFilter : actions) {
-//            if (toFilter.type.equals("uri")) {
-//                return toFilter.uri;
-//            }
-//        }
         return null;
     }
 }
