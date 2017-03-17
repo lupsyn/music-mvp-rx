@@ -69,6 +69,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
                         },
                         throwable -> {
                             if (null != view) {
+                                view.showMessage("Problems:" + throwable.getMessage().toString());
                             }
                         })
 
@@ -81,6 +82,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
                         },
                         throwable -> {
                             if (null != view) {
+                                view.showMessage("Problems:" + throwable.getMessage().toString());
                             }
                         })
 
