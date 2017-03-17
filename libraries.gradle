@@ -37,7 +37,7 @@ ext {
     utilsVersion = "1.0.7"
     timberVersion = "4.3.1"
     picassoVersion = "2.5.2"
-    daggerVersion = "2.8"
+    daggerVersion = "2.9"
 
     annotationVersion = "25.1.1"
     glideVersion = "3.7.0"

@@ -61,23 +61,23 @@ public class MusicDetailFragment extends BaseFragment implements MusicDetailView
     @Inject
     MusicDetailPresenter presenter;
 
-    @BindView(R.id.fragment_article_details_layout_iv)
-    ImageView fragment_article_details_layout_iv;
+    @BindView(R.id.fragmentarticledetailslayoutiv)
+    ImageView fragmentArticleDetailsLayoutIv;
 
-    @BindView(R.id.fragment_music_details_title_tv)
-    TextView fragment_music_details_title_tv;
+    @BindView(R.id.fragmentmusicdetailstitletv)
+    TextView fragmentMusicDetailsTitleTv;
 
-    @BindView(R.id.fragment_music_details_subtitle_tv)
-    TextView fragment_music_details_subtitle_tv;
+    @BindView(R.id.fragmentmusicdetailssubtitletv)
+    TextView fragmentMusicDetailsSubtitleTv;
 
-    @BindView(R.id.fragment_music_shazam_spotted_tv)
-    TextView fragment_music_shazam_spotted_tv;
+    @BindView(R.id.fragmentmusicshazamspottedtv)
+    TextView fragmentMusicShazamSpottedTv;
 
-    @BindView(R.id.fragment_music_shazam_preview)
-    Button fragment_music_shazam_preview;
+    @BindView(R.id.fragmentmusicshazampreview)
+    Button fragmentMusicShazamPreview;
 
-    @BindView(R.id.fragment_music_shazam_onstore)
-    Button fragment_music_shazam_onstore;
+    @BindView(R.id.fragmentmusicshazamonstore)
+    Button fragmentMusicShazamOnstore;
 
     private PublishSubject notifyOnBack = PublishSubject.create();
     private PublishSubject<MusicItem> notifyToRetrive = PublishSubject.create();
@@ -109,11 +109,11 @@ public class MusicDetailFragment extends BaseFragment implements MusicDetailView
         Observable.just(musicItem).subscribe(notifyToRetrive::onNext);
 
 
-        RxView.clicks(fragment_music_shazam_preview)
+        RxView.clicks(fragmentMusicShazamPreview)
                 .map(aVoid -> musicItem)
                 .subscribe(notifiyPreview::onNext);
 
-        RxView.clicks(fragment_music_shazam_onstore)
+        RxView.clicks(fragmentMusicShazamOnstore)
                 .map(aVoid -> musicItem)
                 .subscribe(notifiyGetStore::onNext);
 
@@ -174,13 +174,13 @@ public class MusicDetailFragment extends BaseFragment implements MusicDetailView
     public void showDetail(MusicItem item) {
         Timber.d("Received item to display:" + item.getTitle());
         if (item.getThumb() != null) {
-            Glide.with(context).load(item.getThumb()).into(fragment_article_details_layout_iv);
+            Glide.with(context).load(item.getThumb()).into(fragmentArticleDetailsLayoutIv);
         } else {
-            Glide.with(context).load("http://royal-shop.kz/images/no-img.png").into(fragment_article_details_layout_iv);
+            Glide.with(context).load("http://royal-shop.kz/images/no-img.png").into(fragmentArticleDetailsLayoutIv);
         }
-        fragment_music_details_title_tv.setText(item.getTitle());
-        fragment_music_details_subtitle_tv.setText(item.getSubtitle());
-        fragment_music_shazam_spotted_tv.setText("Searched on shazam : " + item.getNumShazam() + " times");
+        fragmentMusicDetailsTitleTv.setText(item.getTitle());
+        fragmentMusicDetailsSubtitleTv.setText(item.getSubtitle());
+        fragmentMusicShazamSpottedTv.setText("Searched on shazam : " + item.getNumShazam() + " times");
     }
 
     @Override

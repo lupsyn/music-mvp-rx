@@ -34,11 +34,11 @@ import rx.subscriptions.CompositeSubscription;
 public class MusicDetailPresenterImpl implements MusicDetailPresenter {
     private final CompositeSubscription compositeSubscription = new CompositeSubscription();
     private MusicDetailView view;
-    private SchedulerProvider mSchedulerProvider;
+    private SchedulerProvider scheduleProvider;
 
     @Inject
     public MusicDetailPresenterImpl(SchedulerProvider schedulerProvider) {
-        mSchedulerProvider = schedulerProvider;
+        this.scheduleProvider = schedulerProvider;
 
     }
 
@@ -50,7 +50,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
         this.view = view;
 
         addToUnsubscribe(view.onMusicDetailAsked()
-                .observeOn(mSchedulerProvider.mainThread()).subscribe(
+                .observeOn(scheduleProvider.mainThread()).subscribe(
                         item -> {
                             view.showDetail(item);
                         },
@@ -63,7 +63,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
                 ));
 
         addToUnsubscribe(view.onMusicPreview()
-                .observeOn(mSchedulerProvider.mainThread())
+                .observeOn(scheduleProvider.mainThread())
                 .subscribe(musicItem -> {
                             view.getPreview(musicItem);
                         },
@@ -75,7 +75,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
         );
 
         addToUnsubscribe(view.onMusicGet()
-                .observeOn(mSchedulerProvider.mainThread())
+                .observeOn(scheduleProvider.mainThread())
                 .subscribe(musicItem -> {
                             view.getMusic(musicItem);
                         },

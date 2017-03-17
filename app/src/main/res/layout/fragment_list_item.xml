@@ -42,7 +42,7 @@
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/list_section_item_thumbnail"
+            android:id="@+id/listsectionitemthumbnail"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_alignParentBottom="true"
@@ -55,12 +55,12 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_toRightOf="@id/list_section_item_thumbnail"
+            android:layout_toRightOf="@id/listsectionitemthumbnail"
             android:orientation="vertical"
             >
 
             <TextView
-                android:id="@+id/list_section_item_tile"
+                android:id="@+id/listsectionitemtile"
                 fontPath="fonts/Roboto-Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -73,7 +73,7 @@
                 />
 
             <TextView
-                android:id="@+id/list_section_item_subtitle"
+                android:id="@+id/listsectionitemsubtitle"
                 fontPath="fonts/Roboto-Light.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

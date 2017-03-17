@@ -22,31 +22,18 @@
  * SOFTWARE.
  */
 
-package com.music.androidtest.base;
-
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
-import com.music.androidtest.ApplicationComponent;
-import com.music.androidtest.MusicApp;
+package com.music.androidtest;
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public class MusicTestApp extends MusicAppImpl {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        injectDependencies(MusicApp.get(this), MusicApp.getComponent());
+    public ApplicationTestComponent createComponent() {
+        return DaggerApplicationTestComponent
+                .builder()
+                .androidModule(new AndroidModule(this))
+
+                .build();
     }
-
-    protected abstract void injectDependencies(MusicApp application, ApplicationComponent component);
-
-    @Override
-    public void finish() {
-        super.finish();
-        releaseSubComponents(MusicApp.get(this));
-    }
-
-    protected abstract void releaseSubComponents(MusicApp application);
 
 }

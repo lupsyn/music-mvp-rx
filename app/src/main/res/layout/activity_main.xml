@@ -37,10 +37,10 @@
         <include layout="@layout/appbar_layout"/>
 
         <FrameLayout
-            android:id="@+id/content_frame"
+            android:id="@+id/contentframe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar_one">
+            android:layout_below="@+id/toolbarone">
         </FrameLayout>
 
     </RelativeLayout>

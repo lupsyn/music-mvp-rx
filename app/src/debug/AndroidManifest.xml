@@ -23,32 +23,14 @@
   ~ SOFTWARE.
   -->
 
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
+          tests.  Adding this permission to the manifest is not sufficient - you must also grant the
+          permission over adb! -->
+    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/musicswiperefreshlayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/musicrecyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</manifest>

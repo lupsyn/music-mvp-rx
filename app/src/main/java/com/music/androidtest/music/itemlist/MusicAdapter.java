@@ -46,7 +46,7 @@ import rx.Observable;
 import rx.subjects.PublishSubject;
 
 public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<MusicItem> mItems = new ArrayList<>();
+    private final List<MusicItem> items = new ArrayList<>();
     private static Context context;
     private PublishSubject<MusicItem> notify = PublishSubject.create();
 
@@ -64,10 +64,10 @@ public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ArticleViewHolder articleViewHolder = (ArticleViewHolder) holder;
-        articleViewHolder.bind(mItems.get(position));
+        articleViewHolder.bind(items.get(position));
 
         RxView.clicks(((ArticleViewHolder) holder).rootView)
-                .map(aVoid -> mItems.get(position))
+                .map(aVoid -> items.get(position))
                 .subscribe(notify::onNext);
     }
 
@@ -77,24 +77,24 @@ public class MusicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return items.size();
     }
 
     void showMusicItems(List<MusicItem> articles) {
-        this.mItems.addAll(articles);
+        this.items.addAll(articles);
         notifyDataSetChanged();
     }
 
     static class ArticleViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
 
-        @BindView(R.id.list_section_item_tile)
+        @BindView(R.id.listsectionitemtile)
         TextView title;
 
-        @BindView(R.id.list_section_item_subtitle)
+        @BindView(R.id.listsectionitemsubtitle)
         TextView subtitle;
 
-        @BindView(R.id.list_section_item_thumbnail)
+        @BindView(R.id.listsectionitemthumbnail)
         ImageView thumbnailImageView;
 
         ArticleViewHolder(View view) {

@@ -52,10 +52,10 @@ import rx.subjects.PublishSubject;
 public class MusicFragment extends BaseFragment implements MusicView {
 
     //
-    @BindView(R.id.music_swiperefreshlayout)
+    @BindView(R.id.musicswiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.music_recyclerview)
+    @BindView(R.id.musicrecyclerview)
     RecyclerView recyclerView;
 
     // injecting dependencies via Dagger

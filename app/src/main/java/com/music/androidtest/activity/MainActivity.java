@@ -53,7 +53,7 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity {
 
 
-    @BindView(R.id.toolbar_one)
+    @BindView(R.id.toolbarone)
     Toolbar toolbar;
     @BindView(R.id.toolbar_back)
     ImageView backtoolbar;
@@ -61,9 +61,8 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG_ADVERT_FRAGMENT = "FRAGMENT_MUSIC_LIST";
     private static final String TAG_ADVERT_FRAGMENT_DETAIL = "FRAGMENT_MUSIC_DETAIL";
-    private MusicFragment mMusicFragment;
-    private MusicDetailFragment mMusicDetailFragment;
-
+    private MusicFragment musicFragment;
+    private MusicDetailFragment musicDetailFragment;
     private CompositeSubscription subscriptions;
     private CompositeSubscription detailsSubscriptions;
 
@@ -75,10 +74,10 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         if (null == savedInstanceState) {
-            mMusicFragment = MusicFragment.newInstance();
-            attachFragment(mMusicFragment, TAG_ADVERT_FRAGMENT);
+            musicFragment = MusicFragment.newInstance();
+            attachFragment(musicFragment, TAG_ADVERT_FRAGMENT);
         } else {
-            mMusicFragment = (MusicFragment) getSupportFragmentManager().findFragmentByTag(TAG_ADVERT_FRAGMENT);
+            musicFragment = (MusicFragment) getSupportFragmentManager().findFragmentByTag(TAG_ADVERT_FRAGMENT);
         }
     }
 
@@ -97,13 +96,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (null == subscriptions || subscriptions.isUnsubscribed()) {
             subscriptions = new CompositeSubscription();
         }
         subscriptions.addAll(
-                mMusicFragment.onClickMusicItem().subscribe(this::onMusicItemClicked),
-                mMusicFragment.onMessageToShow().subscribe(this::showMessage)
+                musicFragment.onClickMusicItem().subscribe(this::onMusicItemClicked),
+                musicFragment.onMessageToShow().subscribe(this::showMessage)
         );
     }
 
@@ -117,7 +115,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             backtoolbar.setVisibility(View.INVISIBLE);
             if (detailsSubscriptions != null && detailsSubscriptions.hasSubscriptions()) {
@@ -133,31 +130,30 @@ public class MainActivity extends BaseActivity {
     public void onMusicItemClicked(@NonNull MusicItem item) {
         Timber.d("Music item clicked: " + item.getTitle() + " clicked");
         backtoolbar.setVisibility(View.VISIBLE);
-        if (mMusicDetailFragment == null) {
-            mMusicDetailFragment = MusicDetailFragment.newInstance();
+        if (musicDetailFragment == null) {
+            musicDetailFragment = MusicDetailFragment.newInstance();
         }
         if (null == detailsSubscriptions || detailsSubscriptions.isUnsubscribed()) {
             detailsSubscriptions = new CompositeSubscription();
         }
         detailsSubscriptions.addAll(
-                mMusicDetailFragment.onArticleBackPressed().subscribe(this::onHackyBack),
-                mMusicDetailFragment.onMessageToShow().subscribe(this::showMessage)
+                musicDetailFragment.onArticleBackPressed().subscribe(this::onHackyBack),
+                musicDetailFragment.onMessageToShow().subscribe(this::showMessage)
         );
-
         //TODO: to optimize with parcelable
         Bundle bundle = new Bundle();
         Gson gson = new Gson();
         String mapJsonStr = gson.toJson(item);
         bundle.putSerializable(AppConstants.OBJ_TO_SEND, mapJsonStr);
-        mMusicDetailFragment.setArguments(bundle);
-        attachFragment(mMusicDetailFragment, TAG_ADVERT_FRAGMENT_DETAIL);
+        musicDetailFragment.setArguments(bundle);
+        attachFragment(musicDetailFragment, TAG_ADVERT_FRAGMENT_DETAIL);
     }
 
 
     private void attachFragment(@NonNull Fragment fragment, @NonNull
             String tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, fragment, tag);
+        fragmentTransaction.replace(R.id.contentframe, fragment, tag);
         fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
     }

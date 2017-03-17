@@ -27,7 +27,6 @@ package com.music.androidtest.music.itemlist;
 import com.music.androidtest.domain.api.MusicApi;
 import com.music.androidtest.domain.model.MusicItem;
 import com.music.androidtest.domain.utils.SchedulerProvider;
-import com.music.androidtest.music.itemdetail.MusicDetailView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,13 +48,11 @@ public class MusicPresenterTest {
 
     private MusicView view;
     private SchedulerProvider scheduler;
-
-    private MusicInteractor mMusicInteractor;
+    private MusicInteractor musicInteractor;
     private MusicApi api;
-    private MusicPresenter mMusicPresenter;
+    private MusicPresenter musicPresenter;
 
     private final PublishSubject<List<MusicItem>> musicResponse = PublishSubject.create();
-    private final PublishSubject<MusicItem> musicItemPublish = PublishSubject.create();
     private final PublishSubject<Void> refreshRelay = PublishSubject.create();
 
     @Before
@@ -63,54 +60,48 @@ public class MusicPresenterTest {
         api = mock(MusicApi.class);
         scheduler = mock(SchedulerProvider.class);
         view = mock(MusicView.class);
-
-        mMusicInteractor = mock(MusicInteractor.class);
-
+        musicInteractor = mock(MusicInteractor.class);
         // mock scheduler to run immediately
         when(scheduler.mainThread())
                 .thenReturn(Schedulers.immediate());
         when(scheduler.backgroundThread())
                 .thenReturn(Schedulers.immediate());
-        when(mMusicInteractor.getCharts()).thenReturn(musicResponse);
-
+        when(musicInteractor.getCharts()).thenReturn(musicResponse);
         when(view.onRefreshAction()).thenReturn(refreshRelay);
-
-
-        mMusicPresenter = new MusicPresenterImpl(scheduler, mMusicInteractor);
+        musicPresenter = new MusicPresenterImpl(scheduler, musicInteractor);
     }
 
 
     @Test
     public void onViewAttachedAndRefreshed() {
-        mMusicPresenter.register(view);
-        mMusicPresenter.loadMusic();
+        musicPresenter.register(view);
+        musicPresenter.loadMusic();
         refreshRelay.onNext(null);
-        verify(mMusicInteractor).getCharts();
+        verify(musicInteractor).getCharts();
     }
 
     @Test
     public void onRefreshAction_performsRefresh() throws Exception {
-        mMusicPresenter.register(view);
-        mMusicPresenter.loadMusic();
+        musicPresenter.register(view);
+        musicPresenter.loadMusic();
         refreshRelay.onNext(null);
         refreshRelay.onNext(null);
-
-        verify(mMusicInteractor, times(2)).getCharts();
+        verify(musicInteractor, times(2)).getCharts();
     }
 
     @Test
     public void onRefreshAction_withData_showLoading() throws Exception {
-        mMusicPresenter.register(view);
-        mMusicPresenter.loadMusic();
+        musicPresenter.register(view);
+        musicPresenter.loadMusic();
         refreshRelay.onNext(null);
         verify(view).showRefreshing(true);
     }
 
     @Test
     public void onNullElements() {
-        when(mMusicInteractor.getCharts()).thenReturn(Observable.just(null));
-        mMusicPresenter.register(view);
-        mMusicPresenter.loadMusic();
+        when(musicInteractor.getCharts()).thenReturn(Observable.just(null));
+        musicPresenter.register(view);
+        musicPresenter.loadMusic();
         refreshRelay.onNext(null);
         verify(view).showRefreshing(false);
         verify(view).showMessage("Error to retrive : java.lang.NullPointerException");
@@ -118,9 +109,9 @@ public class MusicPresenterTest {
 
     @Test
     public void onZeroElements() {
-        when(mMusicInteractor.getCharts()).thenReturn(Observable.just(new ArrayList<>()));
-        mMusicPresenter.register(view);
-        mMusicPresenter.loadMusic();
+        when(musicInteractor.getCharts()).thenReturn(Observable.just(new ArrayList<>()));
+        musicPresenter.register(view);
+        musicPresenter.loadMusic();
         refreshRelay.onNext(null);
         verify(view).showRefreshing(false);
         verify(view).showMessage("Error to retrive : java.util.NoSuchElementException");

@@ -24,7 +24,6 @@
 
 package com.music.androidtest;
 
-import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class MusicAppImpl  extends MusicApp {

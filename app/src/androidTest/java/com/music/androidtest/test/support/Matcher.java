@@ -22,31 +22,34 @@
  * SOFTWARE.
  */
 
-package com.music.androidtest.base;
+package com.music.androidtest.test.support;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
-import com.music.androidtest.ApplicationComponent;
-import com.music.androidtest.MusicApp;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 
+public class Matcher {
 
-public abstract class BaseActivity extends AppCompatActivity {
+    public static org.hamcrest.Matcher<View> childAtPosition(
+            final org.hamcrest.Matcher<View> parentMatcher, final int position) {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        injectDependencies(MusicApp.get(this), MusicApp.getComponent());
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent)
+                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
     }
-
-    protected abstract void injectDependencies(MusicApp application, ApplicationComponent component);
-
-    @Override
-    public void finish() {
-        super.finish();
-        releaseSubComponents(MusicApp.get(this));
-    }
-
-    protected abstract void releaseSubComponents(MusicApp application);
 
 }

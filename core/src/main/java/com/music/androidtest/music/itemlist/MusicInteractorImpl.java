@@ -36,15 +36,15 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class MusicInteractorImpl implements MusicInteractor {
-    private MusicMapper mMusicMapper;
-    private MusicApi mMusicApi;
-    private SchedulerProvider mSchedulerProvider;
+    private MusicMapper musicMapper;
+    private MusicApi musicApi;
+    private SchedulerProvider schedulerProvider;
 
     @Inject
-    MusicInteractorImpl(MusicApi api, SchedulerProvider scheduler, MusicMapper articleMapper) {
-        this.mMusicApi = api;
-        this.mSchedulerProvider = scheduler;
-        this.mMusicMapper = articleMapper;
+    public MusicInteractorImpl(MusicApi api, SchedulerProvider scheduler, MusicMapper articleMapper) {
+        this.musicApi = api;
+        this.schedulerProvider = scheduler;
+        this.musicMapper = articleMapper;
     }
 
     @Override
@@ -54,8 +54,8 @@ public class MusicInteractorImpl implements MusicInteractor {
 
     @Override
     public Observable<List<MusicItem>> getCharts() {
-        return mMusicApi.getWebChart()
-                .map(mMusicMapper::map)
-                .subscribeOn(mSchedulerProvider.backgroundThread());
+        return musicApi.getWebChart()
+                .map(musicMapper::map)
+                .subscribeOn(schedulerProvider.backgroundThread());
     }
 }

@@ -59,8 +59,12 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    HttpUrl provideEndpoint() {
-        return HttpUrl.parse(Constants.BASE_URL);
+    public HttpUrl provideEndpoint() {
+        return HttpUrl.parse(getBaseUrl());
+    }
+
+    protected String getBaseUrl() {
+        return Constants.BASE_URL;
     }
 
     @Provides
