@@ -25,6 +25,7 @@
 package com.music.androidtest;
 
 
+import com.music.androidtest.activity.MainActivityTestTwo;
 import com.music.androidtest.activity.MainActivityTest;
 import com.music.androidtest.domain.ApiModule;
 import com.music.androidtest.domain.ClientModule;
@@ -43,4 +44,5 @@ import dagger.Component;
 public interface ApplicationTestComponent extends ApplicationComponent {
 
     void inject(MainActivityTest activity);
+    void inject(MainActivityTestTwo activity);
 }

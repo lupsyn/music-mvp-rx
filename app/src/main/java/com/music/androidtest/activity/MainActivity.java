@@ -51,13 +51,10 @@ import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity {
-
-
     @BindView(R.id.toolbarone)
     Toolbar toolbar;
     @BindView(R.id.toolbar_back)
     ImageView backtoolbar;
-
 
     private static final String TAG_ADVERT_FRAGMENT = "FRAGMENT_MUSIC_LIST";
     private static final String TAG_ADVERT_FRAGMENT_DETAIL = "FRAGMENT_MUSIC_DETAIL";

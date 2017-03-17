@@ -30,6 +30,7 @@ import org.junit.Before;
 import javax.inject.Inject;
 
 import okhttp3.mockwebserver.Dispatcher;
+import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.QueueDispatcher;
 
@@ -40,9 +41,11 @@ public class BaseLogicTest {
     Dispatcher dispatcher;
 
 
-    protected MockWebServer getErrorMockWebServer() {
-        mockWebServer.setDispatcher(new QueueDispatcher());
-        return mockWebServer;
+    protected void setResponse(MockResponse response)
+    {
+        QueueDispatcher dispathcer = new QueueDispatcher();
+        dispathcer.enqueueResponse(response);
+        mockWebServer.setDispatcher(dispathcer);
     }
 
     protected MockWebServer getMockWebServer() {
@@ -55,23 +58,6 @@ public class BaseLogicTest {
 
 
     }
-
-
-//    @Test
-//    public void testOnAddedHeader() throws InterruptedException {
-//        MusicApi api = mock(MusicApi.class);
-//        SchedulerProvider scheduler = mock(SchedulerProvider.class);
-//        MusicInteractor interactor = new MusicInteractorImpl(api, scheduler, new MusicMapper());
-//
-//        TestSubscriber<List<MusicItem>> testSubscriber = new TestSubscriber<>();
-//
-//        interactor.getCharts().subscribe(testSubscriber);
-//
-//        RecordedRequest recordedRequest = getMockWebServer().takeRequest();
-//
-//        assertEquals("application/json", recordedRequest.getHeader("Content-Type"));
-//
-//    }
 
     @After
     public void tearDown() throws Exception {
