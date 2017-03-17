@@ -65,20 +65,8 @@ public class MusicPresenterImpl implements MusicPresenter {
                         throw Exceptions.propagate(new NoSuchElementException());
                 })
 
-//                .map(articles -> {
-//                    List<MusicItem> toReturn = new ArrayList<Article>();
-//                    for (Article toScan : articles) {
-//                        if (!mDatabaseHelper.isItFavourite(toScan)) {
-//                            toReturn.add(toScan);
-//                        }
-//                    }
-//                    return toReturn;
-//                })
                 .subscribe(items -> {
                             view.showRefreshing(false);
-//                            if (mDatabaseHelper.getFavourites().size() > 0) {
-//                                view.showFavourites(mDatabaseHelper.getFavourites());
-//                            }
                             view.showMusic(items);
                         },
                         // handle exceptions
