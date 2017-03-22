@@ -64,16 +64,13 @@ public class ApplicationTestModule extends ApplicationModule {
     private MockWebServer getMockWebServer(Dispatcher dispatcher) {
 
         MockWebServer mockWebServer = new MockWebServer();
-       new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mockWebServer.start();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+       new Thread(() -> {
+           try {
+               mockWebServer.start();
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       }).start();
 
 
         mockWebServer.setDispatcher(dispatcher);

@@ -38,7 +38,6 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -49,7 +48,6 @@ public class MusicPresenterTest {
     private MusicView view;
     private SchedulerProvider scheduler;
     private MusicInteractor musicInteractor;
-    private MusicApi api;
     private MusicPresenter musicPresenter;
 
     private final PublishSubject<List<MusicItem>> musicResponse = PublishSubject.create();
@@ -57,7 +55,6 @@ public class MusicPresenterTest {
 
     @Before
     public void setup() {
-        api = mock(MusicApi.class);
         scheduler = mock(SchedulerProvider.class);
         view = mock(MusicView.class);
         musicInteractor = mock(MusicInteractor.class);

@@ -25,8 +25,8 @@
 package com.music.androidtest;
 
 
-import com.music.androidtest.activity.MainActivityTestTwo;
 import com.music.androidtest.activity.MainActivityTest;
+import com.music.androidtest.activity.MainActivityTestTwo;
 import com.music.androidtest.domain.ApiModule;
 import com.music.androidtest.domain.ClientModule;
 

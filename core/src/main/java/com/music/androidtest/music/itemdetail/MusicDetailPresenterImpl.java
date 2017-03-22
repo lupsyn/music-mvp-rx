@@ -51,9 +51,7 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
 
         addToUnsubscribe(view.onMusicDetailAsked()
                 .observeOn(scheduleProvider.mainThread()).subscribe(
-                        item -> {
-                            view.showDetail(item);
-                        },
+                        view::showDetail,
                         throwable -> {
                             if (null != view) {
                                 view.showMessage("Error to retrive : " + throwable);
@@ -64,12 +62,10 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
 
         addToUnsubscribe(view.onMusicPreview()
                 .observeOn(scheduleProvider.mainThread())
-                .subscribe(musicItem -> {
-                            view.getPreview(musicItem);
-                        },
+                .subscribe(view::getPreview,
                         throwable -> {
                             if (null != view) {
-                                view.showMessage("Problems:" + throwable.getMessage().toString());
+                                view.showMessage("Problems:" + throwable.getMessage());
                             }
                         })
 
@@ -77,12 +73,10 @@ public class MusicDetailPresenterImpl implements MusicDetailPresenter {
 
         addToUnsubscribe(view.onMusicGet()
                 .observeOn(scheduleProvider.mainThread())
-                .subscribe(musicItem -> {
-                            view.getMusic(musicItem);
-                        },
+                .subscribe(view::getMusic,
                         throwable -> {
                             if (null != view) {
-                                view.showMessage("Problems:" + throwable.getMessage().toString());
+                                view.showMessage("Problems:" + throwable.getMessage());
                             }
                         })
 

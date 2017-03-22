@@ -97,7 +97,7 @@
                     android:background="@color/colorPrimary"
                     android:elevation="10dp"
                     android:text="@string/details_preview"
-                    ></Button>
+                    />
 
                 <Button
                     android:id="@+id/fragmentmusicshazamonstore"
@@ -108,7 +108,7 @@
                     android:background="@color/colorPrimary"
                     android:elevation="10dp"
                     android:text="@string/details_get_on_store"
-                    ></Button>
+                    />
 
 
             </LinearLayout>

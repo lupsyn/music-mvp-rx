@@ -26,7 +26,6 @@ package com.music.androidtest.music.itemdetail;
 
 import com.music.androidtest.domain.model.MusicItem;
 import com.music.androidtest.domain.utils.SchedulerProvider;
-import com.music.androidtest.music.itemlist.MusicInteractor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +39,6 @@ import static org.mockito.Mockito.when;
 
 public class MusicPresenterDetailTest {
     private MusicDetailView view;
-    private MusicInteractor musicInteractor;
     private MusicDetailPresenter musicDetailPresenter;
     private SchedulerProvider scheduler;
 
@@ -55,7 +53,6 @@ public class MusicPresenterDetailTest {
         item = MusicItem.builder().numShazam("31337").build();
         scheduler = mock(SchedulerProvider.class);
         view = mock(MusicDetailView.class);
-        musicInteractor = mock(MusicInteractor.class);
         // mock scheduler to run immediately
         when(scheduler.mainThread())
                 .thenReturn(Schedulers.immediate());

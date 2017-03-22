@@ -26,6 +26,6 @@ package com.music.androidtest.base;
 
 public interface BaseInteractor {
 
-    void unregister();
+
 
 }

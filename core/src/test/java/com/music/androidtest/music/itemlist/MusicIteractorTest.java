@@ -25,7 +25,6 @@
 package com.music.androidtest.music.itemlist;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.music.androidtest.domain.api.LocalResponseDispatcher;
 import com.music.androidtest.domain.api.MusicApi;
@@ -50,7 +49,6 @@ import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

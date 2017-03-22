@@ -47,10 +47,6 @@ public class MusicInteractorImpl implements MusicInteractor {
         this.musicMapper = articleMapper;
     }
 
-    @Override
-    public void unregister() {
-
-    }
 
     @Override
     public Observable<List<MusicItem>> getCharts() {
